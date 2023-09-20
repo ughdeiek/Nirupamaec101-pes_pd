@@ -42,8 +42,8 @@ OpenLANE ASIC Flow
 Getting Familiar with the Open Source EDA Tools:
 
 1. Design Preparation Step
-
-   /home/vsduser/Pictures/Screenshot from 2023-09-20 13-47-46.png
    
-/home/vsduser/Pictures/Screenshot from 2023-09-20 13-49-52.png
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-20%2013-47-46.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/58ff01f3-d38c-4886-85d1-41de2c767910)
+
+   
    
