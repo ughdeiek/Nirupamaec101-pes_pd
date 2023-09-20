@@ -75,7 +75,9 @@ The flop ratio can be calculated by using:
 
 No. of flops/No. of cells = 1613/14876 = 0.108
 
-    In percentage there is 10.8% of the total number of cells are Flops..
+
+In percentage there is 10.8% of the total number of cells are Flops
+   
 
 
 
