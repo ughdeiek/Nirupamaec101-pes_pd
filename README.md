@@ -273,12 +273,6 @@ file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-48-49.png![ima
 file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-48-49.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/d2a810c5-be94-439c-996f-474d3512dd65)
 file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-53-39.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/8a1cd47d-4e1b-4176-9e33-16d8c778313d)
 file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-10-37.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/a8c64bae-5fa7-4edb-b846-05444e273af0)
-![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/e025bd7f-6d89-4d5d-86e8-ff7f8a23d9bb)
-
-
-![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/3ce8a9b6-6705-4ac5-b008-b1ba0bde218c)
-
-![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/fba38e92-0f57-4429-8610-fecba44c6a92)
 
 
 DAY -4:
@@ -305,5 +299,31 @@ file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-31-08.png![ima
 
 
 DAY -5:
+
+Power Distribution Network :
+After generating our clock tree network and verifying post routing STA checks we are ready to generate the power distribution network gen_pdn in OpenLANE:
+The PDN feature within OpenLANE will create:
+
+    Power ring global to the entire core
+    Power halo local to any preplaced cells
+    Power straps to bring power into the center of the chip
+    Power rails for the standard cells
+We see that there is a change in the DEF.
+
+
+ Global and Detailed Routing
+
+    OpenLANE uses TritonRoute as the routing engine for physical implementations of designs. Routing consists of two stages:
+        Global Routing - Routing guides are generated for interconnects on our netlist defining what layers, and where on the chip each of the nets will be reputed.
+        Detailed Routing - Metal traces are iteratively laid across the routing guides to physically implement the routing guides.
+ DRC errors persist after routing the user has two options:
+
+    Re-run routing with higher QoR settings.
+    Manually fix DRC errors specific in tritonRoute.drc fil
+
+    
+    After routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file.
+    The SPEF extractor is not included within OpenLANE as of now.
+
 
 
