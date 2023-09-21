@@ -76,20 +76,140 @@ The flop ratio can be calculated by using:
 No. of flops/No. of cells = 1613/14876 = 0.108
 
 
-In percentage there is 10.8% of the total number of cells are Flops
+In percentage there is 10.8% of the total number of cells are Flops.
+
+
+   file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2009-43-26.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/231a6580-bca6-457c-9647-b570dd8e5f66)
+
+
+
+
+DAY -2:
+
+
+
+Chip Floor Planning Considerations
+
+Utilization Factor and Aspect Ratio:
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/fe3c8e2a-9a4d-4b77-aacf-52951ef8adb9)
+
+
+    We consider a simple netlist with a Launch and Capture Flop. It also has an AND and OR gate.
+    We then convert it into squares since we need appropriate dimensions
+
+
    
+   ![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/a27297e9-ca7b-4e47-af2a-4b926a19933a)
+
+Let us consider the areas of the gates and Flops as 1 sq unit
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/4d2d0a2d-b200-4627-810f-3d54d3bb2502)
 
 
 
+    Clubbing them together we get an area of 4 sq units
+
+    The 'core' section of a chip is where the fundamental logic design is placed.
+
+    The 'die' area contains the core and is a small semiconductor are on which the fundamental circuit is fabricated.
 
 
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/536519bf-386f-476e-8c56-968a2dc2664f)
     
 
 
 
 
+    Now we put the netlist in the 'core' area and check the utilization.
+    Here
+
+Utilization Factor = Area Occupied by the Netlist/Total Area of the Core
+
+    As we can see here, there is 100% utilization and Utilization Factor = 1.
+    In practical scenarios we don't go for such a high utilization factor.
+    The 'Aspect Ratio = Height/Width = 1'.
 
 
 
+Concept of Pre Placed Cells
    
-   
+   ![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/e3a9bdaa-a7c2-4ee0-b55d-147ffa838058)
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/d22a02e7-c2f8-464a-bf23-e4c468dfa38b)
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/ecc34335-34fe-4793-92c7-3da5168c6453)
+We split the circuit into two parts, block 1 and block 2 as shown above
+
+
+
+https://user-images.githubusercontent.com/142299140/267054839-6a468eae-b0f1-4eb7-ad74-0ba8ba42626d.png
+
+
+
+
+    We extend the I/O pins and black box the boxes.
+    Now we separate the boxes and the get their respective I/O ports.
+    The use of doing this is that the users can use the blocks multiple times and form the required final circuit with ease.
+    They only need to implement the design once and it can be reused.
+    These kind of IPs have user defined locations and are placed in the chip before automated placement and routing takes place. These are called pre-placed cells.
+Surrounding Pre-Placed Cells with Decoupling Capacitors
+
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/e25ae4ca-1c86-4434-841a-4fa2e867592f)
+
+    Huge capacitor filled with charge. The equivalent voltage across the capacitor is similar to what the power supply produces.
+    We add the capacitor in parallel to the circuit.
+    Everytime the circuit switches it draws current from the decoupling capacitor, whereas the outer network with the power supply and other componets is used to re-charge the capacitor
+
+Pin Placement
+
+    In pin placemnt step we use the HDL netlist to determine where a specific pin should be placed in the circuit.
+    We join the common pins and try to keep the connections as effecient as possible.
+    Pins are placed in the Die area.
+
+
+
+Library Binding and Placement
+
+Netlist Binding and Initial Place Design
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/b27842a2-21a5-4616-9492-83959b334687)
+
+
+    In real life, the logic gates and cells do not have shapes, but are present in the form of rectangles and squares.
+    Hence they have dimensions to them and the space where they are placed must be utilized carefully
+    The above picture shows an example of a library.
+    Library consists of various kinds of cells which have different shapes and sizes, flavours and different timing information.
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/037ee1d0-a6ae-4086-a3d2-a83fac601115)
+
+
+    The components of the netlist are placed in the core area.
+    They are placed according to the convenience of distance from the pins.
+    When sending signal from FF1 to FF2, according to the circuit requirements, there has to be a very fast propogation of signals. Hence, they are placed very close and buffers are added since there is a small delay for the signal from the pin to reach FF1. The buffers maintain signal integrity.
+
+
+
+
+LAB:
+
+ file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2009-54-06.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/716bcac4-a529-419f-9598-391e3fcacdd7)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2009-54-23.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/d0c90a7f-d7f7-46df-bc18-4434f84db6e0)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2009-55-06.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/fb107d6f-c6e0-4e3a-83d3-d4001da46358)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2009-56-25.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/07a5f4ca-6a6b-4955-89a0-7655ba092727)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2009-57-19.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/1a441ec1-3978-46cf-b363-b2e613432fe4)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2009-58-17.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/41942d4b-250b-4f2a-931d-82576d8f75f0)
+    
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2009-58-39.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/32e744fe-a22a-4742-b445-10f9d1c7f6de)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2009-59-33.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/94051eb2-ef75-46b2-bd82-f78e6f4d08a0)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2009-59-43.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/b95649fe-8a1e-44de-82b3-8c8914bda5a8)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2010-00-16.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/5138529f-7706-41b9-b174-4a8679268094)
