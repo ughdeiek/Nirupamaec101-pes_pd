@@ -213,3 +213,97 @@ file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2009-59-33.png![ima
 file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2009-59-43.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/b95649fe-8a1e-44de-82b3-8c8914bda5a8)
 
 file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2010-00-16.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/5138529f-7706-41b9-b174-4a8679268094)
+
+
+
+
+
+DAY -3:
+
+inception of Layout and CMOS Fabrication Process:
+
+SPICE Deck Creation for CMOS Inverter
+
+    SPICE Deck is a netlist that has information on:
+        component connectivity
+        component values
+        identifying the nodes
+        giving a designation to the nodes
+
+SPICE Simulation and Switching Threshold:
+
+    The CMOS on the right side has a bigger size than the one on the left.
+    These waveforms tell us that the CMOS is a very robust device. The characteristics of the CMOS are maintained across a variety of sizes.
+    The arrow is pointing to the point where 'Vin = Vout'.
+
+A Git Clone and some other Steps
+
+    We need to perform a git clone here from a repository that we require, to do the future labs.
+    We can type the following command
+
+git clone https://github.com/nickson-jose/vsdstdcelldesign.git
+
+    Now we need to copy the 'sky130A.tech' file into the directory we just cloned
+    We can do this by using
+
+cp sky130A.tech /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+
+ Mask CMOS Process
+
+    Selecting a Substrate - Selecting the appropriate substrate to synthsize the design on.
+    Creating active reagion for transistors - Adding layers of SiO2(40nm), Si3N4(80nm) and photoresist(1um). On top of the photoresist we put a mask layer. Pass UV light and remove the mask. Resist is removed. LOCOS(Local Oxidation of Silicon) is performed. Si3N4 is etched.
+    N-Well and P-Well formation - The next masks are used to create the source and drain regions of the MOSFETs. Boron is used to make P-Well using ion implantation. Phosphorus is used to create N-Well. Put the MOSFET in a Drive In furnace.
+    Formation of Gate - Gate formation involves depositing a gate oxide, defining gate patterns using photolithography, depositing gate material, etching to create gates, doping the substrate and insulating the gates.
+    Lightly Doped Drain Formation(LDD) - Lightly doped drain (LDD) formation involves implanting the drain and source regions of a MOSFET transistor with a lighter concentration of dopants to reduce hot electron effect and short channel effect and enhance device performance.
+    Source and Drain Formation - Source and drain formation in a MOSFET transistor typically involves doping the silicon substrate with chemicals such as arsenic or phosphorous for n-type regions (source and drain) and boron for p-type regions (source and drain). High temperature annealing is performed.
+    Steps to form Contacts and Interconnects(local) - Titanium is deposited with a process known as sputtering. Wafer is heated to about 650 - 700 C in an N2 ambient furnace for 60 seconds. TiSi2 contacts are formed. TiN is also formed used for local communication. TiN is etched using RCA cleaning.
+    Higher Level Metal Formation - Forming contacts and interconnects locally involves depositing a dielectric material like silicon dioxide, patterning it using photolithography, etching contact holes, depositing a barrier metal (e.g., titanium or titanium nitride), filling with a conductor (e.g., aluminum or copper) using chemical vapor deposition (CVD), and then planarizing through chemical-mechanical polishing (CMP).
+
+
+LAB-
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-42-32.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/1cbd24f3-5aa8-4fe2-912b-d6cc1a577689)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-42-43.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/b3ab6d5f-5031-4e45-80f7-01144c20fb6a)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-48-13.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/1bb0eb49-50b8-4bd3-af6e-54532ba38701)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-48-49.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/eecdfa59-0c38-48bd-954a-738c8e766733)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-48-49.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/d2a810c5-be94-439c-996f-474d3512dd65)
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-53-39.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/8a1cd47d-4e1b-4176-9e33-16d8c778313d)
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-10-37.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/a8c64bae-5fa7-4edb-b846-05444e273af0)
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/e025bd7f-6d89-4d5d-86e8-ff7f8a23d9bb)
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/3ce8a9b6-6705-4ac5-b008-b1ba0bde218c)
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/fba38e92-0f57-4429-8610-fecba44c6a92)
+
+
+DAY -4:
+
+Timing Modelling using Delay Tables:
+
+LAB--:
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-11-36.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/38174407-f9ed-4cb2-afe0-3d88c97e3a9a)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-11-49.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/a43831ab-2a37-4e55-9f3f-1dfa8c3781ab)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-17-18.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/c7cc64b3-143b-491f-bf0e-4db247a645ac)
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-18-50.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/5e99af13-7788-4c76-b817-2d6367e9563d)
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-26-11.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/854eb03c-f91e-4b4a-b2b4-8ad5d12e5ebb)
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-26-13.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/1c694246-7fc5-4641-98c9-291811d380fe)
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-30-08.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/c502f584-364d-437d-a58a-d595f6980844)
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-30-08.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/d5c82d7c-fdfd-484f-9769-8212b2e6a079)
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-30-16.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/9a8b2ec2-28b2-4b3f-a3f8-e5f2a4b12c84)
+
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-30-48.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/8cd7f9a6-7873-486b-9e3b-760365e93781)
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-30-48.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/ff163830-bce6-44a0-98e6-03365de66435)
+file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-31-08.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/0cf7fee1-f312-43b1-863a-e0b3c5cdb8a4)
+
+
+DAY -5:
+
+
