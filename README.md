@@ -818,6 +818,8 @@ Lambda rules are process-specific design rules used in semiconductor manufacturi
     To run routing in OpenLANE: run_routing
 
 ![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/9c08a4b8-c339-4811-a01d-86d5f7aa9d09)
+
+
 if DRC errors persist after routing the user has two options:
 
     Re-run routing with higher QoR settings.
