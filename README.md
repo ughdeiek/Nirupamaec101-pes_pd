@@ -588,38 +588,225 @@ To fix the error open the sky130A.tech file using a editor.
 
 DAY -4:
 
-Timing Modelling using Delay Tables:
+ Lab steps to convert Grid info into Track info
 
-LAB--:
+     ~/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/openlane/sky130fd_sc_hd/tracks.info
+    less tracks.info
 
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-11-36.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/38174407-f9ed-4cb2-afe0-3d88c97e3a9a)
 
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-11-49.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/a43831ab-2a37-4e55-9f3f-1dfa8c3781ab)
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/56466d3e-b179-4bb8-90c2-67300ba5d3cc)
 
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-17-18.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/c7cc64b3-143b-491f-bf0e-4db247a645ac)
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-18-50.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/5e99af13-7788-4c76-b817-2d6367e9563d)
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-26-11.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/854eb03c-f91e-4b4a-b2b4-8ad5d12e5ebb)
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-26-13.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/1c694246-7fc5-4641-98c9-291811d380fe)
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-30-08.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/c502f584-364d-437d-a58a-d595f6980844)
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-30-08.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/d5c82d7c-fdfd-484f-9769-8212b2e6a079)
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-30-16.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/9a8b2ec2-28b2-4b3f-a3f8-e5f2a4b12c84)
 
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-30-48.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/8cd7f9a6-7873-486b-9e3b-760365e93781)
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-30-48.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/ff163830-bce6-44a0-98e6-03365de66435)
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-31-08.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/0cf7fee1-f312-43b1-863a-e0b3c5cdb8a4)
+
+
+
+
+
+
+    The 'tracks.info' file is used during the routing stage.
+
+    Routes are the metal traces.
+
+    Since the PNR is an automated flow, we need to specify where all we want the routes to go.
+
+    Now we converge the grid definition in the layout to track definition.
+
+    
+    The next requirement is that the width of the cell should be the odd multiple of xpitch which is '0.46' as seen in the 'tracks.info' file.
+    As we can see it encloses two full boxes and two halves of one box, totally making three boxes as indicated by the white line.
+
+ Lab steps to convert Magic Layout to Std Cell LEF
+
+    In the tkcon window, type save sky130_vsdinv.mag.
+    This is to make our own .mag file.
+    lef write to make .lef file
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/2b738ab0-e88d-4bab-b7ab-f6dc7a55b401)
+
+
+less sky130_vsdinv.lef
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/038a5aad-9987-4282-8101-52b3f60afdb5)
+
+ Introduction to Timing Libs and Steps to include New cell in Synthesis
+
+    We copy the lef file and the libraries.
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/fc9bbffa-608a-45ec-acbb-d63d9919bc2e)
+
+
+
+
+    Next we modify the 'config.tcl' file in the picorv32a folder.
+
+    Open the OpenLANE interactive window and retrieve the 0.9 package.
+
+    prep -design picorv32a -tag 14-09_10-42 -overwrite
+    set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+    add_lefs -src $lefs 
+    run_synthesis
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/d4d6d967-da4f-4b23-a51b-f9a646890920)
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/c6e8f889-780f-41f7-b899-936e0e64229a)
+
+
+
+
+
+ Configure OpenSTA for Post-Synth Timing Analysis
+
+    We must create two files.
+    The first one must be in the openlane directory
+    This file is known as the 'pre_sta.conf' file.
+
+
+
+
+    The second is the my_base.sdc file.
+    This should be in the 'src/sky130' directory under the picorv32a directory.
+
+
+
+
+
+
+
+    To run the timing analysis we type
+    sta pre_sta.conf
+
+
+
+
+There is a slack violation.
+
+
+ Optimise synthesis
+
+    Setting MAX_FANOUT value to 4 reduces the slack violation.
+    set ::env(SYNTH_MAX_FANOUT) 4
+    Then run_synthesis
+
+Since we have synthesised the core using our vsdinv cell too and as it got successfully synthesized, it should be visible in layout after run_placement stage which is followed after run_floorplan stage.
+
+
+
+
+ CTS
+
+    To run CTS we need to type the command.
+    run_cts
+    New .v is created.
+
+
+
+
+     Lab steps to analyse Timing with Real CLocks
+
+    openroad
+    read_lef /openLANE_flow/designs/picorv32a/runs/14-09_10-42/tmp/merged.lef
+    read_def /openLANE_flow/designs/picorv32a/runs/14-09_10-42/results/cts/picorv32a.cts.def
+    write_db pico_cts.db
+    read_db pico_cts.db
+    read_verilog /openLANE_flow/designs/picorv32a/runs/14-09_10-42/results/synthesis/picorv32a.synthesis_cts.v
+    read_liberty -max $::env(LIB_SLOWEST)
+    read_liberty -max $::env(LIB_FASTEST)
+    read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+
+
+
+
+
+
+
+
+
+    set_propagated_clock [all_clocks]
+    report_checks -path_delay min_max -format full_clock_expanded -digits 4
+
+
+
+We perform it again for a more accurate result
+
+
+
+
+
+
+
+
+
+
+ Lab steps to Observe Setup and Hold Timing
+
+    report_clock_skew -hold
+
+
+
+report_clock_skew -setup
+
+
+
+
 
 
 DAY -5:
 
-Power Distribution Network :
-After generating our clock tree network and verifying post routing STA checks we are ready to generate the power distribution network gen_pdn in OpenLANE:
-The PDN feature within OpenLANE will create:
 
-    Power ring global to the entire core
-    Power halo local to any preplaced cells
-    Power straps to bring power into the center of the chip
-    Power rails for the standard cells
-We see that there is a change in the DEF.
+
+Maze routing
+
+    Maze routing is a method used in electronic design automation (EDA) and integrated circuit (IC) design to determine efficient paths for interconnecting various components, such as logic gates, on a chip's layout. The goal is to find a path through a maze-like grid of obstacles while optimizing for factors like wire length, signal delay, and area utilization.
+
+    Lee's algorithm, also known as Lee's breadth-first search (BFS) algorithm, is a graph traversal and pathfinding algorithm that is commonly used in maze routing, maze solving, and other grid-based problems. Named after its creator, C. Y. Lee, the algorithm is particularly useful for finding the shortest path between two points in a grid while exploring the grid layer by layer.
+
+
+DRC
+
+Lambda rules are process-specific design rules used in semiconductor manufacturing to ensure that integrated circuit (IC) layouts adhere to the capabilities and constraints of a particular semiconductor process. These rules are expressed in terms of lambda (λ), a normalized unit of measurement relative to the process technology. Lambda rules can vary between semiconductor foundries and process nodes, but they typically cover various aspects of IC design. Here's a list of common lambda rules and design considerations:
+
+    Minimum Feature Size: Specifies the minimum allowed width and spacing for features such as transistors, metal tracks, and vias, often expressed as multiples of λ.
+    Aspect Ratio: Defines the acceptable aspect ratio (width-to-height ratio) for rectangular structures, ensuring manufacturability.
+    Metal Layer Constraints: Specifies minimum metal track widths, metal-to-metal spacings, and via sizes on metal layers.
+    Poly Pitch: Defines the minimum pitch (spacing between features) for the poly-silicon (poly) layer, which affects the size of transistors and gates.
+    Active Area Constraints: Specifies minimum active area dimensions, ensuring that transistors meet process requirements.
+    Well and Substrate Taps: Covers the placement and size of well and substrate taps for connecting to power and ground planes.
+    Gate Length: Specifies the minimum gate length for transistors, affecting their performance characteristics.
+    Contact and Via Rules: Defines the minimum size and spacing of contacts and vias used to connect different layers in the IC.
+    Local Interconnects: Provides rules for local interconnects, which are used for routing within a cell or macro.
+    Minimum Metal to Active Spacing: Sets the minimum separation between metal tracks and active areas.
+    Minimum Metal to Contact Spacing: Specifies the minimum distance between metal tracks and contacts.
+    Edge Exclusion Zones: Defines exclusion zones near the chip's edge, where certain design elements are not allowed.
+    Density Rules: Enforces limits on the density of features in different regions of the chip to ensure proper manufacturing and avoid over-congestion.
+    Well Proximity Rules: Governs the proximity of different well types (e.g., n-well and p-well) to prevent undesirable interactions.
+    Metal Layer Ordering: Specifies the order in which metal layers should be used in the design hierarchy.
+    Metal Filling: Addresses requirements for metal fill patterns to ensure planarity and manufacturability.
+    Antenna Rules: Addresses the issue of charge buildup (antenna effect) during manufacturing, providing guidelines for mitigating this effect.
+    Variation-Aware Rules: Accounts for process variations, statistical timing, and other variations in critical design rules.
+    Electromigration Constraints: Specifies limits on current densities to prevent electromigration issues in metal tracks.
+    Supply Voltage Constraints: Sets design guidelines for supply voltage levels and power distribution.
+
+ Power Distribution Network
+
+    After generating our clock tree network and verifying post routing STA checks we are ready to generate the power distribution network gen_pdn in OpenLANE:
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/d5914af3-3654-4eab-8004-569653664428)
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/55f8a7f1-710b-4980-b48d-4fe4e6d740db)
+
+
+    The PDN feature within OpenLANE will create:
+        Power ring global to the entire core
+        Power halo local to any preplaced cells
+        Power straps to bring power into the center of the chip
+        Power rails for the standard cells
+    We see that there is a change in the DEF.
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/8852db9c-ab28-42b4-9d3c-0f9b3b26c463)
+
 
 
  Global and Detailed Routing
@@ -627,14 +814,18 @@ We see that there is a change in the DEF.
     OpenLANE uses TritonRoute as the routing engine for physical implementations of designs. Routing consists of two stages:
         Global Routing - Routing guides are generated for interconnects on our netlist defining what layers, and where on the chip each of the nets will be reputed.
         Detailed Routing - Metal traces are iteratively laid across the routing guides to physically implement the routing guides.
- DRC errors persist after routing the user has two options:
+
+    To run routing in OpenLANE: run_routing
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/9c08a4b8-c339-4811-a01d-86d5f7aa9d09)
+if DRC errors persist after routing the user has two options:
 
     Re-run routing with higher QoR settings.
-    Manually fix DRC errors specific in tritonRoute.drc fil
+    Manually fix DRC errors specific in tritonRoute.drc
+
+
+
 
     
     After routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file.
     The SPEF extractor is not included within OpenLANE as of now.
-
-
-
