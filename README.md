@@ -218,61 +218,372 @@ file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2010-00-16.png![ima
 
 
 
+
+
 DAY -3:
 
-inception of Layout and CMOS Fabrication Process:
+ Placer
+
+    In order to change the distance between the IO pins:
+
+     % set ::env(FP_IO_MODE) 2 % run_floorplan
+ 
+We can see that they are no more equidistant.
+
 
 SPICE Deck Creation for CMOS Inverter
+SPICE Simulation Lab for CMOS Inverter
 
-    SPICE Deck is a netlist that has information on:
-        component connectivity
-        component values
-        identifying the nodes
-        giving a designation to the nodes
+    Simulation steps
 
-SPICE Simulation and Switching Threshold:
+    cd <folder where the .cir file is present>
+    source CMOS_INVERTER.cir
+    run
+    setplot
+    dc1
+    display
+    plot out vs in
 
-    The CMOS on the right side has a bigger size than the one on the left.
-    These waveforms tell us that the CMOS is a very robust device. The characteristics of the CMOS are maintained across a variety of sizes.
-    The arrow is pointing to the point where 'Vin = Vout'.
+    ![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/30714342-dfc2-411f-88f6-7efe48060a5e)
 
-A Git Clone and some other Steps
-
-    We need to perform a git clone here from a repository that we require, to do the future labs.
-    We can type the following command
-
-git clone https://github.com/nickson-jose/vsdstdcelldesign.git
-
-    Now we need to copy the 'sky130A.tech' file into the directory we just cloned
-    We can do this by using
-
-cp sky130A.tech /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
-
- Mask CMOS Process
-
-    Selecting a Substrate - Selecting the appropriate substrate to synthsize the design on.
-    Creating active reagion for transistors - Adding layers of SiO2(40nm), Si3N4(80nm) and photoresist(1um). On top of the photoresist we put a mask layer. Pass UV light and remove the mask. Resist is removed. LOCOS(Local Oxidation of Silicon) is performed. Si3N4 is etched.
-    N-Well and P-Well formation - The next masks are used to create the source and drain regions of the MOSFETs. Boron is used to make P-Well using ion implantation. Phosphorus is used to create N-Well. Put the MOSFET in a Drive In furnace.
-    Formation of Gate - Gate formation involves depositing a gate oxide, defining gate patterns using photolithography, depositing gate material, etching to create gates, doping the substrate and insulating the gates.
-    Lightly Doped Drain Formation(LDD) - Lightly doped drain (LDD) formation involves implanting the drain and source regions of a MOSFET transistor with a lighter concentration of dopants to reduce hot electron effect and short channel effect and enhance device performance.
-    Source and Drain Formation - Source and drain formation in a MOSFET transistor typically involves doping the silicon substrate with chemicals such as arsenic or phosphorous for n-type regions (source and drain) and boron for p-type regions (source and drain). High temperature annealing is performed.
-    Steps to form Contacts and Interconnects(local) - Titanium is deposited with a process known as sputtering. Wafer is heated to about 650 - 700 C in an N2 ambient furnace for 60 seconds. TiSi2 contacts are formed. TiN is also formed used for local communication. TiN is etched using RCA cleaning.
-    Higher Level Metal Formation - Forming contacts and interconnects locally involves depositing a dielectric material like silicon dioxide, patterning it using photolithography, etching contact holes, depositing a barrier metal (e.g., titanium or titanium nitride), filling with a conductor (e.g., aluminum or copper) using chemical vapor deposition (CVD), and then planarizing through chemical-mechanical polishing (CMP).
+    
+    The output should be symmetric ie., the threshold voltage should be at vdd/2.
+    If it isnt, try to increase the PMOS width and run the simulation again.
 
 
-LAB-
+Switching Threshold Vm
 
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-42-32.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/1cbd24f3-5aa8-4fe2-912b-d6cc1a577689)
+    CMOS as a circuit itself is a very Robust device.
+    Switching threshold defines the robustness of CMOS.
+    Vm is the point where Vin=Vout.
 
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-42-43.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/b3ab6d5f-5031-4e45-80f7-01144c20fb6a)
+ Lab Steps to Gitclone vsdstdcelldesign
 
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-48-13.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/1bb0eb49-50b8-4bd3-af6e-54532ba38701)
+    git clone https://github.com/nickson-jose/vsdstdcelldesign.git
+     cp sky130A.tech /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
 
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-48-49.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/eecdfa59-0c38-48bd-954a-738c8e766733)
 
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-48-49.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/d2a810c5-be94-439c-996f-474d3512dd65)
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2011-53-39.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/8a1cd47d-4e1b-4176-9e33-16d8c778313d)
-file:///home/vsduser/Pictures/Screenshot%20from%202023-09-21%2012-10-37.png![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/a8c64bae-5fa7-4edb-b846-05444e273af0)
+     
+Create Active Regions
+
+    Fabrication of CMOS is a 16 Mask process.
+
+Selecting the Substrate
+
+    We go for a p-type substrate with
+        resistivity around : 5-50 ohm
+        doping level : 10^15 cm^-3
+        orientation : 100
+
+Creating Active region for transistors
+
+    Grow a layer of SiO2(~40nm) on Psub.
+    Deposit a layer of ~80nm Si3N4 on SiO2.
+    Deposit 1um layer of photoresist(used to define regions).
+    Photolithography.
+    Etch out Si3N4 and SiO2 using a suitable solvent.
+    Place the obtained structure in oxidation furnace due to which field oxide is grown.This process is called LOCOS ( Local oxidation of silicon).
+    Etch out Si3N4 using hot phosphoric acid.
+
+
+Formation of n-well and p-well
+
+    Deposit a layer of photoresist.
+    Apply mask to cover NMOS.
+    Expose to UV light, wash away the area which is exposed and remove mask.
+    Deposit Boron using ion implementation at an energy of 200keV.
+    Repeat the same steps for other half using phosphorous at an energy of 400keV.
+    Wells have been created but the depth is low, hence subject it to high temperature furnace which increases the well depth.
+
+ 
+Formation of Gate Terminal
+
+    Deposit a layer of photoresist.
+    Apply mask to cover NMOS.
+    Expose to UV light, wash away the area which is exposed and remove mask.
+    Deposit Boron using ion implementation at an energy of 200keV cause we need boron at the surface.
+    Repeat the same steps for other half using arsenic.
+    Original oxide etched/stripped using hydroflouric solution.
+    Then re-grown again to give high quality oxide (~10nm thin).
+    Deposit ~0.4um polysilicon layer.
+    Dope N-type (phosphorous/ arsenic) ion implants for low gate resistance.
+    Deposit a layer of photoresist and repeat the same steps till removing the mask.
+
+ Lightly Doped Drain Formation
+
+    The doping profile near n-well is P+, P-, N.
+    Near p-well is N+, N-, P.
+    2 reasons to do this:
+        hot electron effect
+        short cahnnel effect
+    On the surface of SiO2, near N-well, deposit a layer of photoresist, and mask it.
+    Expose to UV light, wash away the area which is exposed and remove mask.
+    Apply phosphorous to form N- implant on p-well.
+    Similarly do it on the other half, but apply boron to form P- implant on n-well.
+    LDD needs to be protected, hence deposit 0.1um thick SiO2 on full structure and etch out using plasma anisotropic etching.
+    This results in the formation of side-wall spacers.
+
+
+    
+Local Interconnect Formation
+
+    Etch thin SiO2 oxide in HF solution.
+    Deposit Titanium of wafer surface using sputtering.
+    Wafer heated at 650-700 degree celsius in N2 ambient for 60 sec.
+    Results in low resistant TiSi2.
+    At the other places, TiN is formed which is used only for local communication.
+    TiN is etched off using RCA cleaning.
+
+
+
+    
+Source and Drain Formation
+
+    On the surface of SiO2, near N-well, deposit a layer of photoresist, and mask it.
+    Expose to UV light, wash away the area which is exposed and remove mask.
+    Deposit arsenic at 75KeV that forms an N+ implant on Pwell.
+    Similarly do it on the other half, but apply boron to form P+ implant on n-well.
+    Subject it to high temperature furnace that results in required thickness of N+,P+,N-,P- implants.
+
+Local Interconnect Formation
+Higher Level Metal Formation
+Lab Introduction to Sky130 Basic Layers Layout and LEF using Inverter
+Lab Steps to Create std cell Layout and Extract SPICE Netlist 
+
+
+  
+
+ Higher Level Metal Formation
+
+    Deposit 1um of SiO2 with phosphorous or boron (known as phosphoborosilicate glass) on wafer surface.
+    Use CMP (chemical mechanical polishing) technique for planarizing wafer surface.
+    TiN and blanket Tungsten layers are deposited and subjected to CMP.
+    An aluminum (Al) layer is added and subjected to photolithography and CMP.
+    Deposit a layer of Si3N4 that acts as dielectric to protect the chip.
+
+
+
+
+
+ab Introduction to Sky130 Basic Layers Layout and LEF using Inverter
+
+    magic -T sky130A.tech sky130_inv.mag &
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/f0e67171-96db-41cd-813c-611d062391aa)
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/f6154bd5-10dd-4144-9330-b0eb978489ec)
+
+
+ab Steps to Create std cell Layout and Extract SPICE Netlist
+
+    DRC errors in magic will be highlighted with white dotted lines.
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/bd7fe057-45e1-41a8-8d7f-1b273860a3ed)
+
+
+
+    To identify DRC errors select DRC find next error.
+    It will be displayed on the tkcon window.
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/cc358aea-5889-42cb-885f-d880dd4a0bcd)
+
+
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/489f2579-5ec9-49a9-9300-6661b29aec48)
+
+
+Extracting to SPICE Command
+
+    extract all
+    ext2spice cthresh 0 rthresh 0
+    ext2spice
+
+cthresh and rthresh are used to extract all parasatic capacitances.
+
+
+We can see that the spice file is created in the folder.
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/b45470f3-c4a7-497e-b278-f4fd846e36ad)
+
+Spice File
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/fb136d1c-bf58-47a8-9a23-dd87a97de41a)
+
+
+
+
+
+
+
+
+
+
+ Lab Steps to Create Final SPICE Deck using Sky130 Tech
+
+    Grid size.
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/c42e8e99-eec6-4139-ba22-c95b09a0b71f)
+
+
+We modified the spice file.
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/203a54d0-4866-4129-a7e7-adeac810ad14)
+
+ngspice sky130_inv.spice
+plot y vs time a
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/b845b52e-965a-4feb-88fb-b759a48b2b5a)
+
+
+ntroduction to Magic Options and DRC rules
++ For reference : http://opencircuitdesign.com/magic/
+
+Magic
+
+    Magic is a venerable VLSI layout tool, written in the 1980's at Berkeley by John Ousterhout, now famous primarily for writing the scripting interpreter language Tcl.
+    Due largely in part to its liberal Berkeley open-source license, magic has remained popular with universities and small companies.
+    The open-source license has allowed VLSI engineers with a bent toward programming to implement clever ideas and help magic stay abreast of fabrication technology.
+    However, it is the well thought-out core algorithms which lend to magic the greatest part of its popularity.
+    Magic is widely cited as being the easiest tool to use for circuit layout, even for people who ultimately rely on commercial tools for their product design flow.
+
+DRC rules
+
+    DRC (Design Rule Check) rules are a set of guidelines and constraints used in the field of semiconductor and integrated circuit (IC) design to ensure that the physical layout of a chip or circuit adheres to the manufacturing process's design rules.
+    These rules are essential for maintaining manufacturability and ensuring that the final ICs can be fabricated without defects.
+    The design rules used by Magic's design rule checker come entirely from the technology file.
+
+
+
+
+Introdcution to Sky130 PDKs and Steps to Download Labs
+
+Sky130 PDK
+
+    SKY130 is a mature 180nm-130nm hybrid technology developed by Cypress Semiconductor that has been used for many production parts.
+
+    SKY130 is now available as a foundry technology through SkyWater Technology Foundry.
+
+    wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+
+ Lab Introduction to Magic and Steps to Load Sky130 Tech-Rules
+
+    To open Magic
+        magic -d XR
+
+    Go to files then open met3.mag file.
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/3a78bb3a-8643-446b-b8e5-a648e5a85a35)
+
+
+    To check which DRC rule is being violated select area.
+    Type drc why in tkcon.
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/c13a2904-86a4-4c77-bdc9-2bfca2dbac94)
+
+
+
+    To add contact cuts add met3 contact by selecting area and clicking on m3contact using middle mouse button.
+    Type cif see VIA2 in tkcon prompt.
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/be1b3500-fa52-43b0-ad0d-8f3f8c3f1efe)
+
+
+ Lab Exercise to fix poly.9 error in Sky130 Tech File
+
+    Type load poly in the tkon prompt.
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/c1384648-d676-486c-820f-9810928d86bd)
+
+The error is:
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/4faacb8c-dce5-44ad-9fb4-5cd1968ca4f7)
+
+
+
+To fix the error open the sky130A.tech file using a editor and search for poly.9 and make the changes.
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/ed61bc68-d5f9-48bd-8afb-57f7c974e333)
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/854ab648-4ced-44fa-a84f-0beba3b3f1ea)
+
+
+    Now load the sky130A.tech file tech load sky130A.tech.
+    Type the command drc check.
+    We can see that the error is fixed.
+
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/a4b39e79-2509-45c1-a0cb-a1c2d768e7c5)
+
+
+
+
+ Lab Challenge Exercise to Describe DRC Error as Geometrical Construct
+
+    Open the nwell.mag file in magic.
+    Select the nwell.6
+    Type the following commands in tkon prompt:
+        cif ostyle drc
+        cif see dnwell_shrink
+        cif see dnwell_missing
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/3123c9b1-d434-4385-893e-adfe8891fe89)
+
+
+To find missing or incorrect rules and fix them.
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/5018ee9d-4bd8-47aa-a432-dfa95d54bb83)
+
+
+
+
+    Error is :
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/16136445-9642-4741-9c7c-eeba967f5776)
+
+
+To fix the error open the sky130A.tech file using a editor.
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/26bbb654-dbe8-4751-8d87-5fd1576fb925)
+
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/1d0428cf-8f26-42d1-8337-f7445cb514a2)
+
+
+
+
+    Now load the sky130A.tech file tech load sky130A.tech.
+    Type the command drc check for both normal and drc fast.
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/71626c3a-ef9a-4e23-8d7e-15b20fcec5c0)
+
+
+
+
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/41916c00-64df-47e0-9419-0d8d2828aa23)
+
+
+
+
+
+
+
+
+
+
+
 
 
 DAY -4:
