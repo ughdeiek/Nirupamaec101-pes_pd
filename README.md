@@ -404,15 +404,9 @@ Extracting to SPICE Command
 cthresh and rthresh are used to extract all parasatic capacitances.
 
 
-We can see that the spice file is created in the folder.
 
 
-![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/b45470f3-c4a7-497e-b278-f4fd846e36ad)
 
-Spice File
-
-
-![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/fb136d1c-bf58-47a8-9a23-dd87a97de41a)
 
 
 
