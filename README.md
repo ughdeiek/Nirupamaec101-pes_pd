@@ -369,14 +369,7 @@ Lab Steps to Create std cell Layout and Extract SPICE Netlist
 
     magic -T sky130A.tech sky130_inv.mag &
 
-
-
-
-
-
-
-
-ab Steps to Create std cell Layout and Extract SPICE Netlist
+ Steps to Create std cell Layout and Extract SPICE Netlist
 
     DRC errors in magic will be highlighted with white dotted lines.
 
@@ -678,6 +671,7 @@ less sky130_vsdinv.lef
 There is a slack violation.
 
 
+
  Optimise synthesis
 
     Setting MAX_FANOUT value to 4 reduces the slack violation.
@@ -685,6 +679,11 @@ There is a slack violation.
     Then run_synthesis
 
 Since we have synthesised the core using our vsdinv cell too and as it got successfully synthesized, it should be visible in layout after run_placement stage which is followed after run_floorplan stage.
+
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/d529d74b-1163-4af5-90e2-ed92d7e1688d)
+
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/c0562280-8d23-441d-ba44-e0261e362894)
 
 
 
