@@ -398,18 +398,6 @@ cthresh and rthresh are used to extract all parasatic capacitances.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
  Lab Steps to Create Final SPICE Deck using Sky130 Tech
 
     Grid size.
@@ -709,6 +697,9 @@ Since we have synthesised the core using our vsdinv cell too and as it got succe
     read_liberty -max $::env(LIB_FASTEST)
     read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
 
+    ![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/d7f5b762-a42c-4de8-b828-80f0d400adf4)
+
+
 
 
 
@@ -720,13 +711,20 @@ Since we have synthesised the core using our vsdinv cell too and as it got succe
     set_propagated_clock [all_clocks]
     report_checks -path_delay min_max -format full_clock_expanded -digits 4
 
+    ![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/83780012-1dd1-44c3-afb3-7a5d7764e97c)
+
+    ![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/3fc1fa19-987d-42b2-858e-960a5dca6475)
+
+
 
 
 We perform it again for a more accurate result
 
 
 
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/d4f347eb-6265-4179-90a6-851f94f98827)
 
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/1bd0a7c9-4e4a-4300-9142-df3e627be74d)
 
 
 
@@ -737,11 +735,13 @@ We perform it again for a more accurate result
 
     report_clock_skew -hold
 
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/03b568e7-a199-4c27-949d-b671f8ec5c1e)
 
 
 report_clock_skew -setup
 
 
+![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/f6f77bc3-818b-47da-9227-ee36df74ed78)
 
 
 
