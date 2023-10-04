@@ -821,8 +821,6 @@ if DRC errors persist after routing the user has two options:
 After routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file.
     The SPEF extractor is not included within OpenLANE as of now.
 
-
-    
 SPEF Extraction
 
     After routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file.
