@@ -373,7 +373,7 @@ Lab Steps to Create std cell Layout and Extract SPICE Netlist
 
 
 
-![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/f6154bd5-10dd-4144-9330-b0eb978489ec)
+
 
 
 ab Steps to Create std cell Layout and Extract SPICE Netlist
