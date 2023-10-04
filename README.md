@@ -365,12 +365,12 @@ Lab Steps to Create std cell Layout and Extract SPICE Netlist
 
 
 
-ab Introduction to Sky130 Basic Layers Layout and LEF using Inverter
+ Introduction to Sky130 Basic Layers Layout and LEF using Inverter
 
     magic -T sky130A.tech sky130_inv.mag &
 
 
-![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/f0e67171-96db-41cd-813c-611d062391aa)
+
 
 
 ![image](https://github.com/ughdeiek/Nirupamaec101-pes_pd/assets/142580251/f6154bd5-10dd-4144-9330-b0eb978489ec)
